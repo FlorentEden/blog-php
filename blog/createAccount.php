@@ -9,7 +9,7 @@
   ) {
     creecompteCheck($_POST["login"],$_POST["mdp"]);
   }else {
-    header("Location:index.php?login=false");
+    header("Location:connexion.php?login=false");
   }
 
   //Check si le compte existe deja
@@ -25,12 +25,12 @@
       $resultat->execute(array($login,$password));
       if ($resultat->rowCount() > 0) {
         //Si le compte existe deja ramene au formulaire
-        header("Location:index.php?create=exist");
+        header("Location:connexion.php?create=exist");
       }else{
         //Si le compte n'existe pas appele la fonction de creation de compte
         creecompte($_POST["login"],$_POST["mdp"]);
         //ramene a la page formulaire
-        header("Location:index.php?create=ok");
+        header("Location:connexion.php?create=ok");
       }
       $resultat->closeCursor();
       }
@@ -46,10 +46,10 @@
     include './NewPdo.php';
     try{
         $password = hash('SHA256', $pass);
-        $sql = "INSERT INTO user (login, password) VALUES (:login, :password)";
+        $sql = "INSERT INTO user (id_user, login, password) VALUES (:id_user, :login, :password)";
         // Préparation de la requête avec les marqueurs
         $resultat = $base->prepare($sql);
-        $resultat->execute(array('login' => $login,'password' => $password));
+        $resultat->execute(array('id_user' => uniqid(),'login' => htmlspecialchars($login),'password' => htmlspecialchars($password)));
         /*echo "L'identifiant de la dernière personne ajoutée est:";
         echo $base->lastInsertId().".";*/
         $resultat->closeCursor();

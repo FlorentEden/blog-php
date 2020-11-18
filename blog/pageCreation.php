@@ -4,7 +4,7 @@
 session_start();
 
 //verifie si est bien connecté
-if (!$_SESSION['login'] == 'yes') {
+if ($_SESSION['login'] == 'no') {
   header("Location:form.php");
 }
 
@@ -13,6 +13,8 @@ if (isset($_GET["publie"]) && $_GET["publie"]=="false") {
   echo "<b>formulaire incorrect</b>";
 }else if (isset($_GET["publie"]) && $_GET["publie"]=="ImageToBig") {
   echo "<b>le fichier choisi est trop grand</b>";
+}else if(isset($_GET["publie"]) && $_GET["publie"]=="true"){
+  echo "<b>article publié !!</b>";
 }
 ?>
 <!DOCTYPE html>
@@ -34,6 +36,6 @@ if (isset($_GET["publie"]) && $_GET["publie"]=="false") {
       <input type="file" name="image" value="img"></br></br>
       <input type="submit" name="ok" value="Envoyer">
     </form>
-    <a href="pageAccueil.php">page d'accueil</a>
+    <a href="index.php">page d'accueil</a>
   </body>
 </html>

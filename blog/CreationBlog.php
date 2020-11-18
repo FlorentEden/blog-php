@@ -4,7 +4,7 @@
 session_start();
 
 //verifie si est bien connecté
-if (!$_SESSION['login'] == 'yes') {
+if ($_SESSION['login'] == 'no') {
   header("Location:form.php");
 }
 
@@ -60,7 +60,8 @@ function creecompte($titre='',$commentaire='',$image='')
       $sql = "INSERT INTO post (id_user, titre_post, commentaire_post, image_post, date_post) VALUES (:iduser, :titre, :commentaire, :image, :datee)";
       // Préparation de la requête avec les marqueurs
       $resultat = $base->prepare($sql);
-      $resultat->execute(array('iduser' => $_SESSION['id_user'],'titre' => $titre,'commentaire' => $commentaire,'image' => $image,'datee' => date("Y-m-d")));
+      $resultat->execute(array('iduser' => $_SESSION['id_user'],'titre' => htmlspecialchars($titre),'commentaire' => htmlspecialchars($commentaire),'image' => $image,'datee' => date("Y-m-d")));
+      header("Location:index.php?publie=true");
       $resultat->closeCursor();
     }
     catch(Exception $e){

@@ -8,7 +8,7 @@
     checkLogin($_POST["login"],$_POST["mdp"]);
   }
   else {
-    header("Location:index.php?login=false");
+    header("Location:connexion.php?login=false");
   }
 
   //Check si le compte existe
@@ -35,7 +35,7 @@
       }else{
         //si le compte n'existe pas ramene a la page formulaire
         $_SESSION['login'] = 'no';
-        header("Location:index.php?login=false");
+        header("Location:connexion.php?login=false");
       }
       $resultat->closeCursor();
       }
