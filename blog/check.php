@@ -24,12 +24,14 @@
       while ($ligne = $resultat->fetch())
       {
         $userId = $ligne[2];
+        $userName = $ligne[0];
       }
       //si le compte existe se connecter en session
       if ($resultat->rowCount() > 0) {
         $_SESSION['login'] = 'yes';
         $_SESSION['id_user'] = $userId;
-        header("Location:pageAccueil.php?login=true");
+        $_SESSION['id_name'] = $userName;
+        header("Location:pageCreation.php?login=true");
       }else{
         //si le compte n'existe pas ramene a la page formulaire
         $_SESSION['login'] = 'no';

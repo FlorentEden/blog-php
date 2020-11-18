@@ -18,7 +18,9 @@
     <!--Formulaire de Connexion-->
     <form action="check.php" method="post" enctype="multipart/form-data">
       <h2>Connexion</h2>
+      <label for="login">nom</label>
       <input type="text" name="login">
+      <label for="mdp">mot de passe</label>
       <input type="password" name="mdp">
       <input type="submit" name="ok" value="Envoyer">
     </form>
