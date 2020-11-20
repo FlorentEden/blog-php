@@ -20,7 +20,7 @@
       $sql = "SELECT login, password, id_user FROM user WHERE login = ? AND password = ?";
       // Préparation de la requête avec les marqueurs
       $resultat = $base->prepare($sql);
-      $resultat->execute(array($login,$password));
+      $resultat->execute(array(htmlspecialchars($login),htmlspecialchars($password)));
       while ($ligne = $resultat->fetch())
       {
         $userId = $ligne[2];

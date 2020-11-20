@@ -57,10 +57,10 @@ function creecompte($titre='',$commentaire='',$image='')
   include './NewPdo.php';
   try{
       $password = hash('SHA256', $pass);
-      $sql = "INSERT INTO post (id_user, titre_post, commentaire_post, image_post, date_post) VALUES (:iduser, :titre, :commentaire, :image, :datee)";
+      $sql = "INSERT INTO post (id_post, id_user, titre_post, commentaire_post, image_post, date_post) VALUES (:idpost, :iduser, :titre, :commentaire, :image, :datee)";
       // Préparation de la requête avec les marqueurs
       $resultat = $base->prepare($sql);
-      $resultat->execute(array('iduser' => $_SESSION['id_user'],'titre' => htmlspecialchars($titre),'commentaire' => htmlspecialchars($commentaire),'image' => $image,'datee' => date("Y-m-d")));
+      $resultat->execute(array('idpost' => uniqid(), 'iduser' => $_SESSION['id_user'],'titre' => htmlspecialchars($titre),'commentaire' => htmlspecialchars($commentaire),'image' => $image,'datee' => date("d-m-y h:i:s")));
       header("Location:index.php?publie=true");
       $resultat->closeCursor();
     }
